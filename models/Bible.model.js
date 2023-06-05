@@ -197,7 +197,7 @@ const bibleSchema = new Schema(
             type: String,
             required: false
         },
-        microfilmDigitalCopy: {
+        nliFilmNumber: {
             type: String,
             required: false
         },

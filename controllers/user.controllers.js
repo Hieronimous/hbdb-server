@@ -6,7 +6,7 @@ const getAllUsers = (req, res, next) => {
 
     User
         .find()
-        .select({ username: 1, email: 1, firstName: 1, lastName: 1, avatar: 1 })
+        .select({ username: 1, email: 1, firstName: 1, lastName: 1, avatar: 1, currentInstitution: 1, userRole: 1 })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
@@ -23,9 +23,7 @@ const getOneUser = (req, res, next) => {
 
 const saveUser = (req, res, next) => {
 
-    const userData = {
-        username, email, firstName, lastName, avatar
-    } = req.body
+    const userData = { username, email, firstName, lastName, avatar, currentInstitution, userRole } = req.body
 
     User
         .create(userData)
@@ -37,12 +35,10 @@ const editOneUser = (req, res, next) => {
 
     const { user_id } = req.params
 
-    const {
-        username, email, firstName, lastName, avatar
-    } = req.body
+    const { username, email, firstName, lastName, avatar, currentInstitution } = req.body
 
     User
-        .findByIdAndUpdate(user_id, { username, email, firstName, lastName, avatar }, { new: true })
+        .findByIdAndUpdate(user_id, { username, email, firstName, lastName, avatar, currentInstitution }, { new: true })
         .then(updatedUser => {
 
             const userPayload = {
@@ -51,7 +47,8 @@ const editOneUser = (req, res, next) => {
                 email: updatedUser.email,
                 firstName: updatedUser.firstName,
                 lastName: updatedUser.lastName,
-                avatar: updatedUser.avatar
+                avatar: updatedUser.avatar,
+                currentInstitution: updatedUser.currentInstitution
             };
 
             const authToken = jwt.sign(
@@ -67,11 +64,22 @@ const editOneUser = (req, res, next) => {
 
 const deleteUser = (req, res, next) => {
     const { user_id } = req.params
-    const { _id: owner } = req.payload
+    //const { _id: owner } = req.payload
     User
-        .findByIdAndDelete({ user_id, owner })
+        .findByIdAndDelete({ user_id })
+        .then(response => res.sendStatus(204))
+        .catch(err => next(err))
+}
+
+
+const addFav = (req, res, next) => {
+    const { user_id } = req.params
+    const { bible_id } = req.params
+
+    User
+        .findByIdAndUpdate(user_id, { $addToSet: { bibles: bible_id } }, { new: true })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
 
-module.exports = { getAllUsers, getOneUser, saveUser, editOneUser, deleteUser }
+module.exports = { getAllUsers, getOneUser, saveUser, editOneUser, deleteUser, addFav }

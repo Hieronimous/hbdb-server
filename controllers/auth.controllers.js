@@ -79,9 +79,8 @@ const login = (req, res, next) => {
 
 const verify = (req, res, next) => {
 
-    setTimeout(() => {
-        res.status(200).json(req.payload)
-    }, 1000)
+    res.status(200).json(req.payload)
+
 }
 
 

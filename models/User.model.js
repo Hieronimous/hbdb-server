@@ -35,7 +35,7 @@ const userSchema = new Schema(
 
     userRole: [{
       type: String,
-      enum: ["Visitor", "Colaborator", "Admin"],  //if Colaborator, to be validate by admin y ver para que Admin no salga en select
+      enum: ["Visitor", "Collaborator", "Admin"],  //if Collaborator, to be validate by admin y ver para que Admin no salga en select
       required: [true, 'User role is required.'],
       default: "Visitor"
     }],
@@ -49,8 +49,6 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Bible",
     }],
-
-
   },
   {
     timestamps: true

@@ -37,8 +37,8 @@ Base Url/bibles
 | PUT | `/edit/:id`| edit bible |
 | DELETE | `/delete/:id`| delete bible |
 
-### COLABORATOS
-| GET	| `/colaborators`|	Colaborators list |
+### CollaboraTOS
+| GET	| `/collaborators`|	Collaborators list |
 
 ### FBCOMUNITY
 

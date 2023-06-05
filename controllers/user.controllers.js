@@ -35,7 +35,7 @@ const editOneUser = (req, res, next) => {
 
     const { user_id } = req.params
 
-    const { username, email, firstName, lastName, avatar, currentInstitution } = req.body
+    const { username, email, firstName, lastName, avatar, currentInstitution, userRole } = req.body
 
     User
         .findByIdAndUpdate(user_id, { username, email, firstName, lastName, avatar, currentInstitution }, { new: true })
@@ -64,7 +64,7 @@ const editOneUser = (req, res, next) => {
 
 const deleteUser = (req, res, next) => {
     const { user_id } = req.params
-    //const { _id: owner } = req.payload
+
     User
         .findByIdAndDelete({ user_id })
         .then(response => res.sendStatus(204))

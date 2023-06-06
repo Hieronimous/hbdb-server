@@ -32,10 +32,14 @@ const userSchema = new Schema(
       type: String,
       required: [false]
     },
+    collaboratorDetail: {
+      type: String,
+      required: [false]
+    },
 
     userRole: [{
       type: String,
-      enum: ["Visitor", "Collaborator", "Admin"],  //if Collaborator, to be validate by admin y ver para que Admin no salga en select
+      enum: ["Visitor", "Collaborator", "Admin"],
       required: [true, 'User role is required.'],
       default: "Visitor"
     }],

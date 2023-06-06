@@ -5,7 +5,7 @@ const saltRounds = 10
 
 const register = (req, res, next) => {
 
-    const { username, email, password, firstName, lastName, userRole, avatar } = req.body
+    const { username, email, password, firstName, lastName, userRole, avatar, collaboratorDetail } = req.body
 
     if (password.length < 5) {
         res.status(400).json({ message: 'Password must have at least 5 characters' })
@@ -23,12 +23,12 @@ const register = (req, res, next) => {
             const salt = bcrypt.genSaltSync(saltRounds)
             const hashedPass = bcrypt.hashSync(password, salt)
 
-            return User.create({ username, email, password: hashedPass, firstName, lastName, userRole, avatar })
+            return User.create({ username, email, password: hashedPass, firstName, lastName, userRole, avatar, collaboratorDetail })
         })
 
         .then((createdUser) => {
-            const { username, email, firstName, lastName, userRole, avatar, _id } = createdUser
-            const user = { username, email, firstName, lastName, userRole, avatar, _id }
+            const { username, email, firstName, lastName, userRole, avatar, _id, collaboratorDetail } = createdUser
+            const user = { username, email, firstName, lastName, userRole, avatar, _id, collaboratorDetail }
             res.status(201).json({ user })
         })
         .catch(err => {
@@ -56,9 +56,9 @@ const login = (req, res, next) => {
 
             if (bcrypt.compareSync(password, foundUser.password)) {
 
-                const { _id, email, username, lastName, firstName, avatar, favoriteBibles, userRole } = foundUser;
+                const { _id, email, username, lastName, firstName, avatar, favoriteBibles, userRole, collaboratorDetail } = foundUser;
 
-                const payload = { _id, email, username, lastName, firstName, avatar, favoriteBibles, userRole }
+                const payload = { _id, email, username, lastName, firstName, avatar, favoriteBibles, userRole, collaboratorDetail }
 
 
                 const authToken = jwt.sign(

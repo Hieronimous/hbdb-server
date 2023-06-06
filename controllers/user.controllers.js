@@ -6,7 +6,7 @@ const getAllUsers = (req, res, next) => {
 
     User
         .find()
-        .select({ username: 1, email: 1, firstName: 1, lastName: 1, avatar: 1, currentInstitution: 1, userRole: 1 })
+        .select({ username: 1, email: 1, firstName: 1, lastName: 1, avatar: 1, currentInstitution: 1, userRole: 1, collaboratorDetail: 1 })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
@@ -24,7 +24,7 @@ const getOneUser = (req, res, next) => {
 
 const saveUser = (req, res, next) => {
 
-    const userData = { username, email, firstName, lastName, avatar, currentInstitution, userRole } = req.body
+    const userData = { username, email, firstName, lastName, avatar, currentInstitution, userRole, collaboratorDetail } = req.body
 
     User
         .create(userData)
@@ -36,10 +36,10 @@ const editOneUser = (req, res, next) => {
 
     const { user_id } = req.params
 
-    const { username, email, firstName, lastName, avatar, currentInstitution, userRole } = req.body
+    const { username, email, firstName, lastName, avatar, currentInstitution, userRole, collaboratorDetail } = req.body
 
     User
-        .findByIdAndUpdate(user_id, { username, email, firstName, lastName, avatar, currentInstitution }, { new: true })
+        .findByIdAndUpdate(user_id, { username, email, firstName, lastName, avatar, currentInstitution, collaboratorDetail }, { new: true })
         .then(updatedUser => {
 
             const userPayload = {
@@ -49,7 +49,8 @@ const editOneUser = (req, res, next) => {
                 firstName: updatedUser.firstName,
                 lastName: updatedUser.lastName,
                 avatar: updatedUser.avatar,
-                currentInstitution: updatedUser.currentInstitution
+                currentInstitution: updatedUser.currentInstitution,
+                collaboratorDetail: updatedUser.collaboratorDetail
             };
 
             const authToken = jwt.sign(

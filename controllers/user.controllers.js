@@ -17,6 +17,7 @@ const getOneUser = (req, res, next) => {
 
     User
         .findById(user_id)
+        .populate('favoriteBibles')
         .then(response => res.json(response))
         .catch(err => next(err))
 }
@@ -66,20 +67,30 @@ const deleteUser = (req, res, next) => {
     const { user_id } = req.params
 
     User
-        .findByIdAndDelete({ user_id })
+        .findByIdAndDelete(user_id)
         .then(response => res.sendStatus(204))
         .catch(err => next(err))
 }
 
 
 const addFav = (req, res, next) => {
-    const { user_id } = req.params
-    const { bible_id } = req.params
+    const { user_id, bible_id } = req.params
+
 
     User
-        .findByIdAndUpdate(user_id, { $addToSet: { bibles: bible_id } }, { new: true })
+        .findByIdAndUpdate(user_id, { $addToSet: { favoriteBibles: bible_id } }, { new: true })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
 
-module.exports = { getAllUsers, getOneUser, saveUser, editOneUser, deleteUser, addFav }
+const deleteFav = (req, res, next) => {
+    const { user_id, bible_id } = req.params
+
+
+    User
+        .findByIdAndUpdate(user_id, { $pull: { favoriteBibles: bible_id } }, { new: true })
+        .then(response => res.json(response))
+        .catch(err => next(err))
+}
+
+module.exports = { getAllUsers, getOneUser, saveUser, editOneUser, deleteUser, addFav, deleteFav }

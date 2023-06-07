@@ -31,7 +31,7 @@ const bibleSchema = new Schema(
         },
         language: {
             type: String,
-            enum: ["Hebrew", "Aramaic", "Hebrew & Aramaic", "Aramaic & Latin", "Hebrew & Latin", "Hebrew & vernacular", "Aramaic & vernacular"],
+            enum: ["Hebrew", "Aramaic", "Hebrew & Aramaic", "Aramaic & Latin", "Hebrew & Latin", "Hebrew & vernacular", "Hebrew & Spanish", "Aramaic & vernacular", "Arabic"],
             required: false,
             require: [true, 'Please select a language']
         },

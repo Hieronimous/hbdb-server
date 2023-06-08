@@ -17,7 +17,7 @@ Base URL/auth
 | GET | `/edit/profile/:id`| render profile  |
 | PUT | `/edit/profile/:id`| edit profile |
 | DELETE| `/edit/profile/:id`| edit profile |
-| GET | `/myPage/:id`| main page with my favorites bibles |
+| GET | `/myPage/:id`| main page with my favorite bibles |
 
 
 ### BIBLES
@@ -28,20 +28,15 @@ Base Url/bibles
 |-------|------|-------------|
 | GET	| `/bibles`|	All the bibles list | 
 | GET	| `details/:id`|	bible detail | 
-| GET	| `/libraries`|	All the libraries list |
-| GET	| `/countries`|	All the countries list |
-| GET	| `/favorites`|Favorites bibles |
-| GET	| `/creatPost`| form-create bible |
-| POST | `/creatPost`	| creat event |
+| GET	| `/favorite`|Favorite bibles |
+| GET	| `/new-entry`| form-create bible |
+| POST | `/everybody`	| list of all the users|
 | GET	| `/edit/:id`| edit bible |
 | PUT | `/edit/:id`| edit bible |
 | DELETE | `/delete/:id`| delete bible |
 
-### CollaboraTOS
-| GET	| `/collaborators`|	Collaborators list |
-
-### FBCOMUNITY
-
-| HTTPS | URI PATH | DESCRIPTION | 
-|-------|------|-------------|
-| GET | `/comunity`| check the post from the facebook comunity |# hbdb-server
+| HTTPS | URI PATH  | DESCRIPTION  |
+|-------------|----------------------------------|----------------------------------|
+| GET         | `/collaborators`                  | Get the list of collaborators    |
+| GET         | `/collaboratorDetails/:user_id`  | Get details of a collaborator    |
+| GET         | `/mycollaborations`              | Collaborator's contributions |

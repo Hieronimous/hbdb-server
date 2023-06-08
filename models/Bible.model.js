@@ -6,13 +6,11 @@ const bibleSchema = new Schema(
             type: String,
             trim: true,
             required: false
-            //required: [true, 'Title is require']
         },
         bibliotheca: {
             type: String,
             trim: true,
             required: false
-            // required: [true, 'Library is require']
         },
         shelfmark: {
             type: String,
@@ -36,7 +34,7 @@ const bibleSchema = new Schema(
             require: [true, 'Please select a language']
         },
         format: {
-            type: String,  /// para buscador
+            type: String,
             enum: ["Codex", "Scroll", "Fragment"],
             required: false,
             require: [true, 'Please select a format']
@@ -52,7 +50,7 @@ const bibleSchema = new Schema(
             required: false,
         },
         century: {
-            type: String,  /// para buscador
+            type: String,
             enum: ["9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "Unknown"],
             required: false,
             require: [true, 'Please select a century']
@@ -98,7 +96,7 @@ const bibleSchema = new Schema(
             type: String,
             required: false
         },
-        scriptGeoculturalArea: { //para buscador
+        scriptGeoculturalArea: {
             type: String,
             enum: ["Sefarad", "Orient", "Ashkenaz", "Italy", "Byzantium", "Yemen", "Does not apply", "Unknown"],
             required: false,
@@ -221,13 +219,13 @@ const bibleSchema = new Schema(
             type: String,
             trim: true,
             required: false
-            // required: [true, 'Location Country is require']///poner ubicacion en mapa
+
         },
         locationCity: {
             type: String,
             trim: true,
             required: false
-            // required: [true, 'Location City is require'] ///poner ubicacion en mapa
+
         },
         comments: [{
             type: String,

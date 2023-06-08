@@ -22,8 +22,6 @@ const saveBible = (req, res, next) => {
     const bibleData = req.body
     const { _id: owner } = req.payload
 
-    console.log("hola",)
-
     Bible
         .create({ ...bibleData, owner })
         .then(response => res.json(response))
@@ -50,7 +48,6 @@ const deleteBible = (req, res, next) => {
 
     Bible
         .findByIdAndDelete(bible_id)
-        // TODO: REVISAR SI HAY MAS ENDPOINTS RESOLUBLES CON SENDSTATUS
         .then(() => res.sendStatus(204))
         .catch(err => next(err))
 }
